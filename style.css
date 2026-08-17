@@ -15,6 +15,12 @@
     --color-bg-letter: #fff8e4;
     --color-border: #DACCBF;
 }
+
+/* Freeze the website until Open is clicked */
+body:not(.started) #wrapper * {
+    animation-play-state: paused !important;
+}
+
 html{
     height: 100%;
 }
@@ -71,10 +77,7 @@ body {
 .content .right{
     width: 60%;
 }
-.left .btn{
-    transform: scale(0);
-    animation: scaleCricle 2s 16s forwards ease-in-out;
-}
+
 #btn__letter{
     position: relative;
     margin-top: 30px;
@@ -190,37 +193,46 @@ body {
     font-family: "Sriracha", cursive;
     
 }
-.date__of__birth{
+.date__of__birth {
     border: 3px solid var(--color-black);
     position: relative;
+
+    /* FORCE hidden before animation */
+    width: 0;
+    height: 0;
     transform: translateY(-100px);
-    z-index: -1;
     opacity: 0;
     visibility: hidden;
-    width: 0px;
+    overflow: hidden;
+
+    z-index: -1;
+
     animation: dateOfBirth 5s 9s forwards;
 }
-@keyframes dateOfBirth{
-    20%,40%{
-        width: 0px;
+@keyframes dateOfBirth {
+    20%, 40% {
+        width: 0;
         height: 0;
-        transform: translateY(0px);
+        transform: translateY(0);
         opacity: 1;
         visibility: visible;
     }
-    45%{
-        transform: translateY(0px);
-        opacity: 1;
-        visibility: visible;
+
+    45% {
         width: 300px;
-        height: 0px;
-    }
-    50%,100%{
-        transform: translateY(0px);
+        height: 0;
+        transform: translateY(0);
         opacity: 1;
         visibility: visible;
+    }
+
+    50%, 100% {
         width: 300px;
         height: 50px;
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+        overflow: visible;
     }
 }
 .name{
@@ -632,6 +644,12 @@ body {
 
 @media screen and (max-width: 658px)   {
 
+        .title .hat {
+        right: -85px;
+        top: -180px;
+        transform: rotate(-25deg);
+    }
+
     .flag__birthday .flag__left {
         transform: rotate(-10deg) translate(-119px,3px);
     }
@@ -794,13 +812,18 @@ body {
 
 
 
-.boxMail{
+/* =========================
+   BOOK / LETTER
+   ========================= */
+
+.boxMail {
     position: fixed;
-    background: rgb(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.8);
     width: 100%;
     height: 100%;
     opacity: 0;
     top: 0;
+    left: 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -809,220 +832,336 @@ body {
     transition: all 0.5s;
     z-index: 100000000;
 }
-.boxMail.active{
+
+.boxMail.active {
     opacity: 1;
     visibility: visible;
     transform: scale(1);
 }
-.boxMail .boxMail-container{
-    position: absolute;
+
+/* BOOK */
+.boxMail .boxMail-container {
+    position: relative;
     width: 750px;
     height: 500px;
     display: flex;
     margin: 0;
-    transform: scale(0.9);
-    -webkit-perspective: 2000px;
     perspective: 2000px;
     transition: all 0.5s;
 }
-.boxMail .boxMail-container:hover{
-    transform: rotate(-5deg);
+
+/* Slight tilt */
+.boxMail .boxMail-container:hover {
+    transform: rotate(-2deg);
     filter: drop-shadow(0 0 10px #FF7882);
 }
-.boxMail .boxMail-container:hover .card1{
-    transform: translate(-187px, -250px) rotateY(-140deg);
-}
-.boxMail .boxMail-container .card1,
-.boxMail .boxMail-container .card2{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border: 1px solid black;
-}
+
+/* =========================
+   FRONT COVER
+   ========================= */
+
 .boxMail .boxMail-container .card1 {
     position: absolute;
     width: 50%;
     height: 100%;
-    background: linear-gradient(to right, #FF7882, #FF7882 63%);
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    background: linear-gradient(145deg, #ff7882, #ff8992);
     color: white;
+
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-}
-.boxMail-container .card1{
-    z-index: 1;
-    -webkit-transform-style: preserve-3d;
+
+    border: 2px solid rgba(255, 255, 255, 0.8);
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.3),
+        inset 0 0 25px rgba(255, 255, 255, 0.12);
+
+    z-index: 2;
+
     transform-style: preserve-3d;
-    transform-origin: left;
-    transition: all 1s ease-in-out;
+    transform-origin: left center;
+
+    transition: transform 1s ease-in-out;
 }
-.boxMail .boxMail-container .card1 .userImg{
+
+/* Decorative border */
+.boxMail .boxMail-container .card1::before {
+    content: "";
+    position: absolute;
+    inset: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    pointer-events: none;
+}
+
+/* Decorative symbols */
+.boxMail .boxMail-container .card1::after {
+    content: "♡   ✦   ♡";
+    position: absolute;
+    top: 25px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.8);
+    letter-spacing: 8px;
+    pointer-events: none;
+}
+
+/* Profile picture */
+.boxMail .boxMail-container .card1 .userImg {
     position: relative;
-    width: 80px;
-    height: 80px;
+    width: 85px;
+    height: 85px;
     background-color: white;
     border-radius: 50%;
     overflow: hidden;
-    border: 2px solid white;
+    border: 3px solid white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
     cursor: pointer;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
-.boxMail .boxMail-container .card1 .userImg img{
+
+.boxMail .boxMail-container .card1 .userImg img {
     position: absolute;
     object-fit: cover;
-    width: calc(100%);
-    height: calc(100%);
+    width: 100%;
+    height: 100%;
 }
-.boxMail .boxMail-container .card1 h3{
+
+/* HAPPY BIRTHDAY */
+.boxMail .boxMail-container .card1 h3 {
     font-family: 'Dancing Script', cursive;
-    font-size: 40px;
+    font-size: 42px;
     text-transform: uppercase;
-    width: 80%;
+    width: 90%;
     text-align: center;
-    line-height: 1.5;
-    letter-spacing: 5px;
-    transform: rotate(-5deg);
-    text-shadow: 0 0 5px white,
-                0 0 10px white;
+    line-height: 1.25;
+    letter-spacing: 4px;
+    margin: 10px 0;
+    color: white;
+
+    text-shadow:
+        0 0 5px white,
+        0 0 12px #ffccd1,
+        2px 3px 4px rgba(0, 0, 0, 0.25);
 }
-.boxMail .boxMail-container .card2{
-    position: relative;
+
+/* =========================
+   FLIP THE COVER
+   ========================= */
+
+.boxMail .boxMail-container:hover .card1 {
+    transform: translate(-50%, -50%) rotateY(-140deg);
+}
+
+
+/* =========================
+   MESSAGE PAGE
+   ========================= */
+
+.boxMail .boxMail-container .card2 {
+    position: absolute;
+
     width: 50%;
     height: 100%;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
     background: linear-gradient(to right, #e0e0e0, #ffffff 30%);
-    -webkit-transform-style: preserve-3d;
+
+    z-index: 1;
+
     transform-style: preserve-3d;
-    transform-origin: left;
-    transition: all 1s;
 }
+
+/* Message inside page */
 .boxMail .boxMail-container .card2 .card2-content {
     width: 100%;
     height: 100%;
+
     position: relative;
+
     background-color: #FF7882;
-    transition: all 1s;
+
     overflow-y: auto;
     overflow-x: hidden;
+
     box-sizing: border-box;
+
     padding: 0 35px 30px 35px;
+
     font-family: "Inter", serif;
     color: #fff;
+
+    text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.25);
 }
 
-.boxMail .boxMail-container:hover .card2-content{
-    transform: translate(20px, 20px);
-    box-shadow: -1px -1px 5px rgb(0, 0, 0, 0.4);
-}
+/* To You */
 .boxMail .boxMail-container .card2 h3 {
     font-family: 'Dancing Script', cursive;
+
     padding: 20px 0 10px 0;
     margin: 0;
+
+    width: 100%;
+
+    text-align: left;
+
     opacity: 0;
     visibility: hidden;
+
     font-size: 25px;
-    text-shadow: 0 0 8px #FF7882;
+
+    text-shadow:
+        1px 2px 4px rgba(0, 0, 0, 0.25);
 }
-.boxMail .boxMail-container .card2:hover h3{
-    animation: texth3 2s forwards;
+
+.boxMail .boxMail-container .card2:hover h3 {
+    animation: texth3 1s forwards;
     animation-delay: 1s;
-    transition: 1s;
 }
+
 @keyframes texth3 {
-    0% {
-        opacity: 1;
-        visibility: visible;
-        padding: 20px 0 10px 0;
+    from {
+        opacity: 0;
+        visibility: hidden;
     }
 
-    100% {
+    to {
         opacity: 1;
         visibility: visible;
-        padding: 20px 0 10px 0;
     }
 }
+
+/* Birthday message */
 .boxMail .boxMail-container .card2 h2 {
     font-family: 'Dancing Script', cursive;
+
     padding: 0;
     margin: 0;
+
     text-indent: 0;
+
     font-size: 22px;
     line-height: 1.45;
+
     text-align: left;
+
     opacity: 0;
+
+    text-shadow:
+        1px 2px 4px rgba(0, 0, 0, 0.25);
 }
-.boxMail .boxMail-container .card2:hover h2{
-    animation: texth2 2s forwards;
-    animation-delay: 4s;
-    transition: 1s;
+
+.boxMail .boxMail-container .card2:hover h2 {
+    animation: texth2 1s forwards;
+    animation-delay: 1s;
 }
-@keyframes texth2{
-    0%{
+
+@keyframes texth2 {
+    from {
         opacity: 0;
     }
-    100%{
+
+    to {
         opacity: 1;
     }
 }
-.boxMail .boxMail-container .card2 .card2-content .imageCute2{
+
+
+/* =========================
+   DECORATION
+   ========================= */
+
+.boxMail .boxMail-container .card2 .card2-content .imageCute2 {
     position: absolute;
     top: 5px;
     left: 20px;
+
     opacity: 0;
+
     transition: 1s;
 }
-.boxMail .boxMail-container .card2 .card2-content:hover .imageCute2{
-    animation: cute3 1s linear infinite,
-                cute4 3s 2s forwards;
+
+.boxMail .boxMail-container .card2 .card2-content:hover .imageCute2 {
+    animation:
+        cute3 1s linear infinite,
+        cute4 3s 2s forwards;
+
     animation-delay: 2s;
-    transition: 1s;
 }
-@keyframes cute3{
-    0%{
+
+@keyframes cute3 {
+    0%, 100% {
         opacity: 1;
         transform: rotate(0deg);
     }
-    25%{
+
+    25% {
         opacity: 1;
         transform: rotate(5deg);
     }
-    50%{
+
+    50% {
         opacity: 1;
         transform: rotate(0deg);
     }
-    75%{
+
+    75% {
         opacity: 1;
         transform: rotate(-5deg);
     }
-    100%{
-        opacity: 1;
-        transform: rotate(0deg);
-    }
 }
-@keyframes cute4{
-    0%{
+
+@keyframes cute4 {
+    from {
         left: 20px;
     }
-    100%{
+
+    to {
         left: 100px;
     }
 }
-.boxMail .boxMail-container .card2 .card2-content .imageCute2 img{
+
+.boxMail .boxMail-container .card2 .card2-content .imageCute2 img {
     width: 40px;
 }
-.boxMail .fa-xmark{
+
+
+/* =========================
+   CLOSE BUTTON
+   ========================= */
+
+.boxMail .fa-xmark {
     position: fixed;
     top: 0;
     right: 0;
+
     font-size: 30px;
     padding: 10px 25px;
+
     cursor: pointer;
+
     color: white;
+
     z-index: 10000000000000000;
 }
+
+
+/* =========================
+   SCROLLBAR
+   ========================= */
+
 .boxMail .card2-content::-webkit-scrollbar {
     width: 6px;
 }
@@ -1036,151 +1175,823 @@ body {
     background: transparent;
 }
 
+
 /* =========================
-   MOBILE FIX
+   MOBILE
    ========================= */
 
 @media screen and (max-width: 600px) {
 
-    /* Keep the main birthday screen at its normal mobile size */
-    .content {
-        transform: none;
-    }
-
-
-    /* Make the book a horizontal book */
     .boxMail .boxMail-container {
-        width: 94vw;
-        height: 58vw;
-        max-width: 600px;
-        max-height: 360px;
-        min-height: 250px;
+        width: 98vw;
+        height: calc(98vw / 1.4);
+
+        max-width: 650px;
+        max-height: 450px;
+
+        min-height: 280px;
 
         transform: scale(1);
     }
 
-    /* Keep the original flip geometry */
-    .boxMail .boxMail-container:hover {
-        transform: rotate(-5deg);
-    }
-
-    .boxMail .boxMail-container:hover .card1 {
-        transform: translate(-47vw, -29vw) rotateY(-140deg);
-    }
-
-    /* Front page */
-    .boxMail .boxMail-container .card1 h3 {
-        font-size: clamp(20px, 6vw, 32px);
-        letter-spacing: 2px;
-        line-height: 1.3;
-        width: 85%;
-    }
-
-    .boxMail .boxMail-container .card1 .userImg {
-        width: clamp(55px, 15vw, 80px);
-        height: clamp(55px, 15vw, 80px);
-        margin-bottom: 12px;
-    }
-
-    /* Message page */
-    .boxMail .boxMail-container .card2 .card2-content {
-        padding: 0 15px 15px;
-        box-sizing: border-box;
-        overflow-y: auto;
-        overflow-x: hidden;
-    }
-
-    /* "To You!" */
-    .boxMail .boxMail-container .card2 h3 {
-        padding: 15px 0 8px 0;
-        margin: 0;
-        font-size: clamp(16px, 5vw, 25px);
-        text-align: center;
-    }
-
-    /* Birthday message */
-    .boxMail .boxMail-container .card2 h2 {
-        padding: 0;
-        margin: 0;
-        text-indent: 0;
-        font-size: clamp(12px, 3.5vw, 18px);
-        line-height: 1.4;
-        text-align: left;
-    }
-
-}
-
-@media screen and (max-width: 600px) {
-
-    /* Keep the book proportional */
-    .boxMail .boxMail-container {
-        width: 92vw;
-        height: calc(92vw / 1.5);
-        max-height: 500px;
-        transform: scale(1);
-    }
-
-    /* Keep both pages as proper book pages */
+    /* Keep the two pages half-width */
     .boxMail .boxMail-container .card1,
     .boxMail .boxMail-container .card2 {
         width: 50%;
         height: 100%;
     }
 
-    /* Center HAPPY BIRTHDAY on the first page */
-    .boxMail .boxMail-container .card1 h3 {
-        width: 90%;
-        margin: 0;
-        text-align: center;
-        font-size: clamp(18px, 5vw, 32px);
-        letter-spacing: 2px;
-        line-height: 1.3;
+    /* Cover */
+    .boxMail .boxMail-container .card1,
+    .boxMail .boxMail-container .card2 {
+        left: 50%;
+        top: 50%;
     }
 
-    /* Center "To You!" */
+    /* Mobile flip */
+    .boxMail .boxMail-container:hover .card1 {
+        transform: translate(-50%, -50%) rotateY(-140deg);
+    }
+
+    /* Birthday title */
+    .boxMail .boxMail-container .card1 h3 {
+        width: 100%;
+        font-size: 16px;
+        letter-spacing: 1px;
+        line-height: 1.2;
+        margin: 4px 0;
+    }
+
+    /* To: Althea Elizabeth */
+    .boxMail .boxMail-container .card1 .username {
+        font-size: 12px;
+        margin: 3px 0;
+        line-height: 1.2;
+    }
+
+    /* A very little birthday surprise just for you */
+    .boxMail .boxMail-container .card1 .cover-subtitle {
+        font-size: 9px;
+        margin: 3px 8px 0;
+        line-height: 1.2;
+    }
+
+    /* Profile */
+    .boxMail .boxMail-container .card1 .userImg {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 5px;
+        flex-shrink: 0;
+    }
+
+    .boxMail .boxMail-container .card1 .userImg img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .boxMail .boxMail-container .card1 .userImg img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /* Message */
+    .boxMail .boxMail-container .card2 .card2-content {
+        padding: 0 15px 15px;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    /* To You */
     .boxMail .boxMail-container .card2 h3 {
-        padding: 15px 0 8px 0 !important;
+        padding: 15px 0 8px 0;
         margin: 0;
         width: 100%;
         text-align: center;
+        font-size: clamp(16px, 5vw, 25px);
+    }
+
+    /* Message text */
+    .boxMail .boxMail-container .card2 h2 {
+        padding: 0;
+        margin: 0;
+        font-size: clamp(12px, 3.5vw, 18px);
+        line-height: 1.4;
+        text-align: left;
+    }
+}
+/* =========================
+   CLICK TO LOAD SCREEN
+   ========================= */
+
+#loading-screen {
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(circle at 50% 40%, #fff6f7 0%, #feecea 45%, #ffd9de 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999999999999;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+    overflow: hidden;
+}
+
+/* Soft floating hearts */
+#loading-screen::before,
+#loading-screen::after {
+    content: "♡  ♥  ✦  ♡  ✦  ♥  ♡";
+    position: absolute;
+    font-size: 35px;
+    color: rgba(255, 120, 130, 0.25);
+    letter-spacing: 25px;
+    white-space: nowrap;
+    animation: floatingHearts 8s linear infinite;
+}
+
+#loading-screen::before {
+    top: 15%;
+    left: -20%;
+}
+
+#loading-screen::after {
+    bottom: 15%;
+    right: -20%;
+    animation-delay: -4s;
+}
+
+@keyframes floatingHearts {
+    from {
+        transform: translateX(0) rotate(-3deg);
+    }
+    to {
+        transform: translateX(40%) rotate(3deg);
+    }
+}
+
+.loading-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    font-family: "Dancing Script", cursive;
+
+    background: rgba(255, 255, 255, 0.65);
+    padding: 35px 45px 40px;
+    border-radius: 30px;
+
+    border: 3px solid #333;
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.15),
+        inset 0 0 25px rgba(255, 255, 255, 0.8);
+
+    backdrop-filter: blur(8px);
+
+    animation: loadingPop 1s ease;
+}
+
+@keyframes loadingPop {
+    from {
+        opacity: 0;
+        transform: scale(0.7) translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.loading-content h1 {
+    font-size: 75px;
+    margin: 0 0 5px;
+
+    animation: floatingEnvelope 2s ease-in-out infinite;
+    filter: drop-shadow(0 5px 5px rgba(0,0,0,0.15));
+}
+
+@keyframes floatingEnvelope {
+    0%, 100% {
+        transform: translateY(0) rotate(-3deg);
+    }
+
+    50% {
+        transform: translateY(-10px) rotate(3deg);
+    }
+}
+
+.loading-content p {
+    font-size: 30px;
+    margin: 0 0 15px;
+    color: #333;
+}
+
+.loading-content .loading-subtitle {
+    font-family: "Sriracha", cursive;
+    font-size: 15px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* GIF */
+.loading-gif {
+    display: block;
+    width: 130px;
+    height: 130px;
+    object-fit: contain;
+    margin: 0 auto 20px;
+    border-radius: 20px;
+}
+
+/* START BUTTON */
+#start-button {
+    background: linear-gradient(135deg, #ff7882, #ff9da5);
+    color: white;
+
+    border: 3px solid #333;
+    border-radius: 50px;
+
+    padding: 12px 35px;
+
+    font-family: "Sriracha", cursive;
+    font-size: 20px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 6px 0 #333,
+        0 10px 20px rgba(255, 120, 130, 0.3);
+
+    transition: all 0.2s ease;
+}
+
+#start-button:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow:
+        0 10px 0 #333,
+        0 15px 25px rgba(255, 120, 130, 0.4);
+}
+
+#start-button:active {
+    transform: translateY(3px) scale(0.98);
+    box-shadow:
+        0 3px 0 #333;
+}
+
+/* Fade away after clicking */
+#loading-screen.hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* =========================
+   FRIEND GREETINGS
+   ========================= */
+
+    .button-group {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        margin-top: 30px;
+
+        /* Keep buttons hidden initially */
+        transform: scale(0);
+
+        /* Same animation as your original button */
+        animation: scaleCricle 2s 16s forwards ease-in-out;
+
+        flex-wrap: wrap;
+    }
+
+.button-group #btn__letter,
+.button-group #btn__friends {
+    margin-top: 0;
+}
+
+/* FRIEND MODAL */
+
+#friends-modal {
+    position: fixed;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.75);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.8);
+
+    transition: all 0.4s ease;
+
+    z-index: 999999999;
+}
+
+#friends-modal.active {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+}
+
+/* CARD */
+
+.friends-card {
+    position: relative;
+
+    width: 650px;
+    max-width: 90vw;
+
+    min-height: 430px;
+
+    padding: 35px;
+
+    border-radius: 25px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff8e4,
+            #feecea
+        );
+
+    border: 4px solid #333;
+
+    box-shadow:
+        0 20px 50px rgba(0,0,0,.35);
+
+    text-align: center;
+
+    font-family: "Sriracha", cursive;
+}
+
+.friends-card h1 {
+    font-family: "Dancing Script", cursive;
+
+    font-size: 42px;
+
+    color: #ff7882;
+
+    text-shadow:
+        2px 2px #333;
+}
+
+.friends-subtitle {
+    font-size: 18px;
+
+    margin-bottom: 25px;
+}
+
+/* CLOSE */
+
+#close-friends {
+    position: absolute;
+
+    top: 12px;
+    right: 15px;
+
+    width: 35px;
+    height: 35px;
+
+    border-radius: 50%;
+
+    border: 2px solid #333;
+
+    background: white;
+
+    cursor: pointer;
+
+    font-size: 18px;
+
+    transition: .2s;
+}
+
+#close-friends:hover {
+    transform: rotate(90deg) scale(1.1);
+
+    background: #ff7882;
+
+    color: white;
+}
+
+/* PROFILES */
+
+.friend-profiles {
+    display: flex;
+
+    justify-content: center;
+    align-items: flex-start;
+
+    gap: 20px;
+
+    flex-wrap: wrap;
+
+    /* SCROLL AREA */
+    max-height: 220px;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    padding: 10px 10px 15px;
+
+    /* Keeps scrollbar from touching the profiles */
+    box-sizing: border-box;
+}
+
+/* Scrollbar for friend profiles */
+.friend-profiles::-webkit-scrollbar {
+    width: 7px;
+}
+
+.friend-profiles::-webkit-scrollbar-thumb {
+    background: #ff7882;
+    border-radius: 10px;
+}
+
+.friend-profiles::-webkit-scrollbar-track {
+    background: rgba(255, 120, 130, 0.15);
+    border-radius: 10px;
+}
+
+.friend-profile {
+    width: 110px;
+
+    cursor: pointer;
+
+    transition: .3s ease;
+}
+
+.friend-profile:hover {
+    transform: translateY(-8px) scale(1.05);
+}
+
+.friend-profile img {
+    width: 95px;
+    height: 95px;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    border: 4px solid #333;
+
+    box-shadow:
+        0 5px 12px rgba(0,0,0,.25);
+}
+
+.friend-profile span {
+    display: block;
+
+    margin-top: 8px;
+
+    font-size: 17px;
+
+    color: #333;
+}
+
+.friend-profile .editor-note {
+    display: block;
+
+    margin-top: 2px;
+
+    font-family: "Sriracha", cursive;
+    font-size: 11px;
+
+    color: #777;
+
+    font-style: italic;
+}
+
+/* MESSAGE */
+
+#friend-message {
+    margin-top: 25px;
+
+    padding: 20px;
+
+    border-radius: 18px;
+
+    background: #ff7882;
+
+    color: white;
+
+    border: 3px solid #333;
+
+    opacity: 0;
+
+    transform: translateY(15px);
+
+    transition: .4s;
+
+    min-height: 90px;
+
+    /* SCROLLABLE MESSAGE */
+    max-height: 150px;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    box-sizing: border-box;
+}
+
+#friend-message::-webkit-scrollbar {
+    width: 6px;
+}
+
+#friend-message::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+}
+
+#friend-message::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#friend-message.active {
+    opacity: 1;
+
+    transform: translateY(0);
+}
+
+#friend-message h2 {
+    font-family: "Dancing Script", cursive;
+
+    margin: 0 0 5px;
+
+    font-size: 27px;
+}
+
+.friend-description {
+    display: block;
+
+    margin-top: -5px;
+    margin-bottom: 10px;
+
+    font-family: "Sriracha", cursive;
+    font-size: 13px;
+
+    color: rgba(255, 255, 255, 0.8);
+
+    font-style: italic;
+}
+
+#friend-message p {
+    margin: 0;
+
+    font-size: 17px;
+    line-height: 1.5;
+}
+
+
+/* MOBILE */
+
+@media screen and (max-width: 600px) {
+
+    .button-group {
+        gap: 8px;
+    }
+
+    .button-group button {
+        font-size: 14px !important;
+        padding: 6px 10px !important;
+    }
+
+@media screen and (max-width: 600px) {
+
+    .button-group {
+        gap: 8px;
+    }
+
+    .button-group button {
+        font-size: 14px !important;
+        padding: 6px 10px !important;
+    }
+
+    .friends-card {
+        width: 90vw;
+        max-width: 400px;
+        padding: 18px 12px;
+        min-height: 340px;
+    }
+
+    .friends-card h1 {
+        font-size: 32px;
+    }
+
+    .friend-profiles {
+        gap: 15px;
+    }
+
+    .friend-profile {
+        width: 80px;
+    }
+
+        #friend-message {
+        max-height: 100px;
+        overflow-y: auto;
+        padding: 12px;
+        margin-top: 15px;
+    }
+
+    .friend-profile img {
+        width: 70px;
+        height: 70px;
+    }
+
+    #friend-message p {
+    margin: 0;
+
+        font-size: 17px;
+        line-height: 1.5;
     }
 
 }
 
+.friend-profiles {
+    gap: 10px;
+
+    max-height: 120px;
+    overflow-y: auto;
+
+    padding: 5px;
+}
+
+.friend-profile {
+    width: 65px;
+}
+
+.friend-profile img {
+    width: 55px;
+    height: 55px;
+}
+
+.friend-profile span {
+    font-size: 12px;
+    margin-top: 4px;
+}
+#friend-message .friend-description {
+    font-size: 12px;
+    line-height: 1.3;
+    margin-bottom: 10px;
+}
+#friend-message {
+    max-height: 140px;
+    min-height: 90px;
+
+    overflow-y: auto;
+
+    padding: 12px;
+    margin-top: 10px;
+}
+
+#friend-message h2 {
+    font-size: 20px;
+}
+
+.friend-description {
+    font-size: 11px;
+    margin-top: -3px;
+    margin-bottom: 8px;
+}
+
+#friend-message p {
+    font-size: 14px;
+    line-height: 1.4;
+}
+/* SHOW IMAGE BUTTON */
+#show-friend-image {
+    display: none;
+
+    margin: 15px auto 0;
+
+    padding: 8px 18px;
+
+    background: linear-gradient(135deg, #ff7882, #ff9da5);
+
+    color: white;
+
+    border: 3px solid #333;
+    border-radius: 25px;
+
+    font-family: "Sriracha", cursive;
+    font-size: 15px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 4px 0 #333,
+        0 5px 12px rgba(0, 0, 0, 0.2);
+
+    transition: all 0.2s ease;
+}
+
+/* Hover */
+#show-friend-image:hover {
+    transform: translateY(-3px) scale(1.05);
+
+    background: linear-gradient(135deg, #ff9da5, #ff7882);
+
+    box-shadow:
+        0 7px 0 #333,
+        0 8px 15px rgba(0, 0, 0, 0.25);
+}
+
+/* Click */
+#show-friend-image:active {
+    transform: translateY(2px);
+
+    box-shadow:
+        0 2px 0 #333;
+}
+}
+
 /* =========================
-   MOBILE PARTY HAT
+   BUTTON GROUP
    ========================= */
 
-@media screen and (max-width: 600px) {
+.button-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
 
-    .title .hat {
-        display: block !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-        position: absolute !important;
+    /* Hidden until the animation starts */
+    transform: scale(0);
 
-        top: -350px;
-        right: -55%;
+    animation: scaleCricle 2s 16s forwards ease-in-out;
 
-        width: 110px;
-        height: auto;
+    flex-wrap: wrap;
+}
 
-        z-index: 1 !important;
+/* Make BOTH buttons look the same */
 
-        animation: topHat 4s 7s forwards ease !important;
-        transform: rotate(-40deg);
-    }
+.button-group #btn__letter,
+.button-group #btn__friends {
+    position: relative;
+    margin-top: -10px;
 
-    .title .hat img {
-        display: block !important;
-        width: 110px;
-        height: auto;
-    }
+    background-color: var(--color-text-pink);
 
-    /* Keep Happy Birthday in front of the hat */
-    .title h1 {
-        position: relative;
-        z-index: 2;
-    }
+    outline: none;
 
+    padding: 5px 15px;
+
+    font-size: 1rem;
+
+    border-radius: 50px;
+
+    border: 3px solid var(--color-black);
+
+    font-family: "Sriracha", cursive;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    z-index: 2;
+
+    transform: scale(1);
+
+    transition: all .5s ease-in-out;
+}
+
+/* Hover */
+
+.button-group #btn__letter:hover,
+.button-group #btn__friends:hover {
+    border-color: var(--color-heart);
+
+    background-color: var(--color-heart);
+
+    color: #fff;
+
+    box-shadow:
+        rgba(0, 0, 0, 0.24)
+        0px 3px 8px;
+}
+
+/* Icons */
+
+.button-group #btn__letter i,
+.button-group #btn__friends i {
+    margin-left: 5px;
+}
+
+/* Icon animation */
+
+.button-group #btn__letter:hover i,
+.button-group #btn__friends:hover i {
+    animation: rotateHeart 1s infinite linear;
+}
+
+/* Press animation */
+
+.button-group #btn__letter:active,
+.button-group #btn__friends:active {
+    transform: scale(0.7);
 }

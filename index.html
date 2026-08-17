@@ -23,7 +23,15 @@
     <audio id="bgMusic" loop>
         <source src="./audio/BGM.mp3" type="audio/mpeg">
     </audio>
-    
+
+        <audio id="clickSound" preload="auto">
+        <source src="./audio/Click.mp3" type="audio/mpeg">
+    </audio>
+
+        <audio id="bgMusic2" loop>
+        <source src="./audio/HappyBirthday.mp3" type="audio/mpeg">
+    </audio>
+        
     <div id="wrapper">
         <div class="flag__birthday">
             <img src="./images/1.png" alt="" width="350" class="flag__left">
@@ -56,15 +64,23 @@
                 <div class="date__of__birth">
                     <span></span>
                 </div>
-                <div class="btn">
-                    <button id="btn__letter">
-                        <div class="mail">
-                            Press this Monsterfox
-                            <i class="fa-regular fa-envelope"></i>
-                        </div>
-                    </button>
+        <div class="button-group">
 
+            <button id="btn__letter">
+                <div class="mail">
+                    Press this Monsterfox
+                    <i class="fa-regular fa-envelope"></i>
                 </div>
+            </button>
+
+            <button id="btn__friends">
+                <div class="mail">
+                    Friend Greetings
+                    <i class="fa-solid fa-users"></i>
+                </div>
+            </button>
+
+        </div>
             </div>
             <div class="right">
                 <div class="box__account">
@@ -73,7 +89,7 @@
                     </div>
                     <div class="name">
                         <i class="fa-solid fa-heart"></i>
-                        <span>Dear Althea</span>
+                        <span>For Althea</span>
                         <i class="fa-solid fa-heart"></i>
                     </div>
                     <div class="balloon_one">
@@ -134,9 +150,10 @@
                     <div class="userImg">
                         <img src="images/Althea2.png" alt="">
                     </div>
-                    <h4 class="username">To: Althea Elizabeth 😽😽<span class="underline"></span></h4>
+                    <h4 class="username">To: Althea Elizabeth<span class="underline"></span></h4>
 
                     <h3>Happy Birthday</h3>
+                    <p class="cover-subtitle">My birthday message for you ♡</p>
                     <div class="imageCute">
                         <img src="cute1.png" alt="">
                     </div>
@@ -146,13 +163,18 @@
                     <h3>To You!</h3>
                     <h2>
             Happy Birthday, Althea!!<br>
-            I wish you a day filled with joy, love, and all the things that make you smile.
+
+                I wish you a day filled with joy, love, and all the things that make you smile.
             You deserve to have an amazing day because you are such an amazing and adorable person!<br>
-            I’m truly grateful to have you in my life! Your kindness (Wants MrBeast DEAD..), caring (Bites me very often), and genuine heart
+
+                I’m truly grateful to have you in my life! Your kindness (Wants MrBeast DEAD..), caring (Bites me very often), and genuine heart
             inspire me every day. I really admire you!<br>
-            Thank you for being such a wonderful presence and always bringing positive energy wherever you go.<br>
+
+                Thank you for being such a wonderful presence and always bringing positive energy wherever you go.<br>
             I’m really really happy that I get to celebrate another birthday with you, and I hope we get to make many more memories together and no matter what the future brings, I will always be cheering you on and wishing the best for you!<br>
-            Many happy returns of the day! Happy birthday again, my love. I love you so much!
+            Many happy returns of the day! Happy birthday again, my love.
+            
+            I love you so much!
         </h2>
 
                         <div class="imageCute2">
@@ -163,11 +185,399 @@
             </div>
         </div>
     </div>
+<div id="loading-screen">
+    <div class="loading-content">
 
-</body>
+        <h1>💌</h1>
+
+        <p>Click to open</p>
+
+        <div class="loading-subtitle">
+            A little birthday surprise awaits...
+        </div>
+
+        <!-- GIF -->
+        <img 
+            src="./images/Birthday.gif" 
+            alt="Cute animation"
+            class="loading-gif"
+        >
+
+        <button id="start-button">
+            Open ✨
+        </button>
+
+    </div>
+</div>
+
+<!-- FRIEND GREETINGS -->
+<div id="friends-modal">
+
+    <div class="friends-card">
+
+        <button id="close-friends">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <h1>Friend Greetings!</h1>
+        <p class="friends-subtitle">These Messages are from our GIMB Members! ♡</p>
+
+        <div class="friend-profiles">
+
+            <!-- Cloudysky -->
+            <div class="friend-profile"
+                 data-name="Cloudysky"
+                 data-message="I am happy you are still here despite all you went through and those promises of happiness I made to you in those times now I hope continues to come all true for you. Happiest Birthday kiddo love you always."
+                 data-description="“Yeah just like what unctie said you deserve all the happiness that’s coming your way!">
+
+                <img src="./images/Cloudysky.png" alt="Cloudysky">
+                <span>Cloudysky</span>
+                <small class="editor-note">(The cloud that goons)</small>
+
+            </div>
+
+            <!-- Katsuki -->
+            <div class="friend-profile"
+                 data-name="Katsuki"
+                 data-message="Happy Birthday zalie ✌️ I hope you are doing great with your school remember to take care bud 🤤 happy christmas 🎄🎁 goofffffff gobo gobo "
+                 data-description="'Happy Independence Day Zalie' She said before changing her message to this-">
+
+                <img src="./images/Katsuki.jpg" alt="Katsuki">
+                <span>Katsuki</span>
+                <small class="editor-note">(The furry who has alot of Server Badges)</small>
+
+            </div>
+
+            <!-- Natsu -->
+            <div class="friend-profile"
+                 data-name="Natsu"
+                 data-message="HAPPPPPyyy BIRthsddayyy ZaliEEEEE Grind GENSHIN"
+                 data-description="Go grind for Odette bro">
+
+                <img src="./images/Natsu.jpg" alt="Natsu">
+                <span>Natsu</span>
+                <small class="editor-note">(Wisest man alive.. wiser than John Zhu?)</small>
+
+            </div>
+
+            <!-- Goober -->
+            <div class="friend-profile"
+                data-name="Goober"
+                data-message="HAPPY BIRTHDAY ZALIE I WISH U THE BEST BIRTHDAY EVER 💖 💖 💖"
+                data-description="I told her to tell Kailer to send a birthday message aswell but she forgot-">
+
+                <img src="./images/Goober.png" alt="Goober">
+                <span>Goober</span>
+                <small class="editor-note">(A.K.A GOONER)</small>
+
+            </div>
+
+            <!-- Kailer -->
+            <div class="friend-profile"
+                data-name="Kailer"
+                data-message="Happy birthday papi!! can't believe we've been friends for a year and a half now!! Not quite sure but i just want to let u know i love u so much take good care of urself and enjoy ur special day!!💖💖💖"
+                data-description="OMG THE LECHON CAN SPEAK! also that's crazy time flies fr">
+
+                <img src="./images/Kailer.png" alt="Kailer">
+                <span>Kailer</span>
+                <small class="editor-note">(The lechon reserved for later dinner.)</small>
+
+            </div>
+
+            <!-- Uncle Tofu -->
+            <div class="friend-profile"
+                data-name="Uncle Tofu"
+                data-message="Keep ballin keep moggin keep strollin keep rollin Until the world is callin Keep them tuggin Until you keep on winnin"
+                data-description="“Yeah don't even ask me- I don't know as well..">
+
+                <img src="./images/Tofu.png" alt="Uncle Tofu">
+                <span>Uncle Tofu</span>
+                <small class="editor-note">(Toefu's balls)</small>
+
+            </div>
+            <!-- Midnight -->
+           <div class="friend-profile"
+                data-name="Midnight"
+                data-message="Happy birthday, Zalie! You are officially one step closer to becoming an UNC!!! I hope you're doing well, and more importantly, I hope you have a great birthday today because you genuinely deserve to enjoy your special day. You're one of my online friends who I really appreciate because you're such an inclusive person. No unnecessary judgment, no insults, and no weird reactions toward someone's feelings. I'm genuinely happy for you guys. My boy met someone like you, and honestly, I'm glad he did. Also, this is probably one of his goofiest moments, so I'll just add some context behind the image. 💀 Anyway, that's all from me. I hope you enjoy your birthday and make some good memories today. I'm not expecting anything, nor am I predicting anything. I'm simply wishing you the best. Sincerely,"
+                data-description="Holy message.. Also that 'goofiest moments' he's talking about.. yeah- he can't find the photo anymore :laugh:"
+                data-image="./images/MidnightPhoto.png">
+
+                <img src="./images/Midnight.png" alt="Midnight">
+                <span>Midnight</span>
+                <small class="editor-note">(Everyone's rainbow bestie)</small>
+
+            </div>
+
+            <!-- Moon -->
+            <div class="friend-profile"
+                data-name="Moon"
+                data-message="Otanjoubi omedetou! 🥳 Entering a new chapter is always special, and I hope this one turns out to be your favorite one yet. May your days ahead be lighthearted, filled with great memories, and written with all the best moments a main character deserves. Hope this new age brings you clarity, warmth, and endless reasons to smile. Have an amazing birthday! <3"
+                data-description="OTANJOUBI OMEDETOU!!">
+                
+
+                <img src="./images/Moon.png" alt="Moon">
+                <span>Moon</span>
+                <small class="editor-note">(Moonsterfox)</small>
+
+            </div>
+
+             <!-- Xaira -->
+            <div class="friend-profile"
+                data-name="Xaira"
+                data-message="HAPPIEST BIRTHDAY, SWEETIEEE!!💗 I HOPE YOU ENJOY YOUR SPECIAL DAY TODAY. I HOPE WE CAN MEET AGAIN SOOONNN CUS I MISS YOUUUU🥹 ( MANIFESTING THIS DECEMBER:3) HIIRAGI WILL BE OUR THIRD WHEEL MWHAHAHA JK. HAPPIEST BIRTHDAY AGAIN, WIFEYY KO! I LOVE YOU FOREVER AND I'M ALWAYS HERE FOR YOU! 💗💗"
+                data-description="WHO SAID IM THIRD WHEELING??!">
+
+                <img src="./images/Xaira.png" alt="Xaira">
+                <span>Xaira</span>
+                <small class="editor-note">(The member who barked in ToD-)</small>
+
+            </div>
+
+
+                        <!-- Tito JP -->
+            <div class="friend-profile"
+                data-name="Tito JP"
+                data-message="Happy birthday zaliee🥳🥳. I hope you enjoy your birthday. Wishing you lots of happiness, good health, and success. I hope you enjoy your special day and make many wonderful memories. Happiest birthday nakk ingat alwayss!"
+                data-description="I want pasalubong as well from Tito JP..">
+
+                <img src="./images/JP.png" alt="Tito JP">
+                <span>Tito JP</span>
+                <small class="editor-note">(Your uncle that doesn't give pasalubongs)</small>
+
+            </div>
+
+            <!-- Cynia -->
+            <div class="friend-profile"
+                data-name="Cynia"
+                data-message="HAPPY BIRTHDAY ZALIEEEEEE!! I HOPE YOU GET EVERYTHING YOU WISHED FOR!!! 🎉🎉🎉🎉"
+                data-description="I don't know who this person is">
+
+                <img src="./images/Cynia.png" alt="Cynia">
+                <span>Cynia</span>
+                <small class="editor-note">(WHO IS THIS?!)</small>
+
+            </div>
+
+                        <!-- Silkypetal -->
+            <div class="friend-profile"
+                data-name="Silkypetal"
+                data-message="HALLO ZALIEE 🤍 guess who this is hehe okok first i just wanna say HAPPY BIRTHDAY to YOUU🥳🥳🎂🎊🎊 and uh even though we don't know eachother irl, I'm really grateful that i can get a chance to become one of your online friends - and how i hope we can one day meet each other 🥹. I hope & pray that today can be a wonderful day for you to spend with your loved ones, and i hope you'll have presents to open 🥳! I pray you'll grow into a GREAT, AMAZING person to everyone around you — and thank you so so so SOOOOO much for being a friend of mine, I hope for whatever happens today will be a memorable thing for you i really really hope today can be enjoyable for you, & tell us how your day went yeah:D THANKUSOMUCHFORBEINGINTHISWORLDILY🤍🤍🤍🤍🥹🥹🫡 haha ur old now😂"
+                data-description="She said guess who this person is but oh well-">
+
+                <img src="./images/Silk.png" alt="Silkypetal">
+                <span>Silkypetal</span>
+                <small class="editor-note">(StinkyPetal)</small>
+
+            </div>
+
+        </div>
+
+        <!-- MESSAGE -->
+
+            <h2></h2>
+
+            <div class="friend-description"></div>
+
+            <p></p>
+
+            <button id="show-friend-image" style="display: none;">
+                Show Midnight's Stupid Image
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const startButton = document.getElementById("start-button");
+    const loadingScreen = document.getElementById("loading-screen");
+
+    const clickSound = document.getElementById("clickSound");
+
+    // =========================
+    // PLAY CLICK SOUND
+    // =========================
+
+    function playClickSound() {
+        clickSound.currentTime = 0;
+        clickSound.volume = 0.8;
+        clickSound.play().catch(() => {});
+    }
+
+
+    // =========================
+    // OPEN WEBSITE
+    // =========================
+
+startButton.addEventListener("click", function () {
+
+    playClickSound();
+
+    document.body.classList.add("started");
+
+    loadingScreen.classList.add("hide");
+
+    // =========================
+    // START BGM #2
+    // =========================
+
+    const bgMusic2 = document.getElementById("bgMusic2");
+
+    bgMusic2.currentTime = 0;
+    bgMusic2.volume = 0;
+
+    bgMusic2.play().catch(() => {});
+
+    let volume2 = 0;
+
+    const fadeInBGM2 = setInterval(function () {
+
+        volume2 += 0.02;
+
+        if (volume2 >= 1) {
+            volume2 = 1;
+            clearInterval(fadeInBGM2);
+        }
+
+        bgMusic2.volume = volume2;
+
+    }, 100);
+
+});
+
+
+    // =========================
+    // FRIEND GREETINGS
+    // =========================
+
+    const friendsButton = document.getElementById("btn__friends");
+    const friendsModal = document.getElementById("friends-modal");
+    const closeFriends = document.getElementById("close-friends");
+
+    const friendProfiles =
+        document.querySelectorAll(".friend-profile");
+
+    const friendMessage =
+        document.getElementById("friend-message");
+
+    const friendMessageName =
+        friendMessage.querySelector("h2");
+
+    const friendMessageText =
+        friendMessage.querySelector("p");
+
+    const friendMessageDescription =
+        friendMessage.querySelector(".friend-description");
+
+    const showFriendImage =
+    document.getElementById("show-friend-image");
+
+
+    // OPEN FRIEND GREETINGS
+
+    friendsButton.addEventListener("click", function () {
+
+        playClickSound();
+
+        friendsModal.classList.add("active");
+
+    });
+
+
+    // CLOSE FRIEND GREETINGS
+
+    closeFriends.addEventListener("click", function () {
+
+        playClickSound();
+
+        friendsModal.classList.remove("active");
+
+        friendMessage.classList.remove("active");
+
+    });
+
+
+// =========================
+// CLICK FRIEND PROFILE
+// =========================
+
+friendProfiles.forEach(function (profile) {
+
+    profile.addEventListener("click", function (event) {
+
+        // If a button inside the profile was clicked,
+        // don't trigger the profile itself
+        if (event.target.closest("button")) {
+            return;
+        }
+
+        playClickSound();
+
+        const name = this.dataset.name;
+        const message = this.dataset.message;
+        const description = this.dataset.description;
+
+        friendMessageName.textContent = name;
+        friendMessageDescription.textContent = description;
+        friendMessageText.textContent = message;
+
+        friendMessage.classList.remove("active");
+
+        setTimeout(function () {
+            friendMessage.classList.add("active");
+        }, 50);
+
+    });
+
+});
+
+showFriendImage.addEventListener("click", function () {
+
+    playClickSound();
+
+    const image = this.dataset.image;
+
+    if (image) {
+        window.open(image, "_blank");
+    }
+
+});
+
+
+    // =========================
+    // EVERY BUTTON GETS CLICK SOUND
+    // =========================
+
+    document.querySelectorAll("button").forEach(function (button) {
+
+        button.addEventListener("click", function () {
+
+            // Don't play twice for buttons already handled above
+            if (
+                button === startButton ||
+                button === friendsButton ||
+                button === closeFriends
+            ) {
+                return;
+            }
+
+            playClickSound();
+
+        });
+
+    });
+
+});
+</script>
+
 <script>
     let datetxt = "August 18, 2010";
-    let datatxtletter = "My love. You are a very special girl. I always silently thank you for coming into my life. Today, I wish you all the best, lots of health, and lots of joy. I always hope we will celebrate many more birthdays like this together. Happy birthday to you.💕";
+    let datatxtletter = "My love. You are a very special girl. I always silently thank you for coming into my life. Today, I wish you all the best, lots of health, and lots of joy. I always hope we will celebrate many more birthdays like this together. Happy birthday to you my love!";
     let titleLetter = "To you";
     let charArrDate = datetxt.split('');
     let charArrDateLetter = datatxtletter.split('');
@@ -191,7 +601,7 @@
                 clearInterval(timeDatetxt)
             }
         }, 100)
-    }, 12000)
+    }, 15000)
 
     var intervalContent;
     var intervalTitle;
@@ -254,55 +664,130 @@
 
 
 
-    let mailBox = document.querySelector('.mail')
+    let mailBox = document.querySelector('#btn__letter')
     let boxmail = document.querySelector('.boxMail')
-    var close = document.querySelector('.fa-xmark')
+    var close = document.querySelector('.boxMail .fa-xmark')
 
 let fadeInterval;
-    mailBox.onclick = function () {
-    mailBox.classList.toggle('active')
-    boxmail.classList.add('active')
+
+mailBox.onclick = function () {
+
+    mailBox.classList.toggle('active');
+    boxmail.classList.add('active');
 
     const bgMusic = document.getElementById("bgMusic");
+    const bgMusic2 = document.getElementById("bgMusic2");
 
+    // Stop any previous fade
     clearInterval(fadeInterval);
 
-    bgMusic.currentTime = 50;
-    bgMusic.volume = 0;
-    bgMusic.play();
+    // =========================
+    // FADE OUT BGM #2
+    // =========================
 
-    let volume = 0;
+    let volume2 = bgMusic2.volume;
 
-    fadeInterval = setInterval(function () {
-        volume += 0.02;
+    const fadeOutBGM2 = setInterval(function () {
 
-        if (volume >= 1) {
-            volume = 1;
-            clearInterval(fadeInterval);
+        volume2 -= 0.02;
+
+        if (volume2 <= 0) {
+            volume2 = 0;
+            bgMusic2.volume = 0;
+            bgMusic2.pause();
+
+            clearInterval(fadeOutBGM2);
+
+            // =========================
+            // START BGM #1
+            // =========================
+
+            bgMusic.currentTime = 50;
+            bgMusic.volume = 0;
+
+            bgMusic.play().catch(() => {});
+
+            let volume1 = 0;
+
+            fadeInterval = setInterval(function () {
+
+                volume1 += 0.02;
+
+                if (volume1 >= 1) {
+                    volume1 = 1;
+                    clearInterval(fadeInterval);
+                }
+
+                bgMusic.volume = volume1;
+
+            }, 100);
+
+        } else {
+            bgMusic2.volume = volume2;
         }
 
-        bgMusic.volume = volume;
     }, 100);
-}
+};
 
 close.addEventListener('click', function () {
-    boxmail.classList.remove('active')
+
+    boxmail.classList.remove('active');
 
     const bgMusic = document.getElementById("bgMusic");
+    const bgMusic2 = document.getElementById("bgMusic2");
 
-    let volume = bgMusic.volume;
+    // =========================
+    // FADE OUT BGM #1
+    // =========================
 
-    const fadeOut = setInterval(function () {
-        if (volume > 0.02) {
-            volume -= 0.02;
-            bgMusic.volume = volume;
-        } else {
+    let volume1 = bgMusic.volume;
+
+    const fadeOutBGM1 = setInterval(function () {
+
+        volume1 -= 0.02;
+
+        if (volume1 <= 0) {
+
+            volume1 = 0;
+
             bgMusic.volume = 0;
             bgMusic.pause();
-            clearInterval(fadeOut);
+
+            clearInterval(fadeOutBGM1);
+
+            // =========================
+            // FADE IN BGM #2
+            // =========================
+
+            bgMusic2.volume = 0;
+            bgMusic2.play().catch(() => {});
+
+            let volume2 = 0;
+
+            const fadeInBGM2 = setInterval(function () {
+
+                volume2 += 0.02;
+
+                if (volume2 >= 1) {
+                    volume2 = 1;
+                    clearInterval(fadeInBGM2);
+                }
+
+                bgMusic2.volume = volume2;
+
+            }, 100);
+
+        } else {
+
+            bgMusic.volume = volume1;
+
         }
+
     }, 100);
-})
+
+});
 </script>
+
+</body>
 
 </html>
